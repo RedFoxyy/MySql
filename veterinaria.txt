@@ -1,0 +1,48 @@
+CREATE DATABASE veterinaria;
+use veterinaria;
+CREATE TABLE dono(
+    coddono int PRIMARY KEY AUTO_INCREMENT,
+    nome varchar(255),
+    cpf varchar(20) UNIQUE,
+    telefone varchar(20));
+CREATE TABLE animal(
+    idanimal int PRIMARY KEY AUTO_INCREMENT,
+    nome varchar(255),
+    raca varchar(255),
+    peso decimal (7, 2),
+    dono int,
+    FOREIGN KEY (dono) REFERENCES dono(coddono));
+
+    SHOW TABLES;
+
+    DESCRIBE animal;
+    DESCRIBE dono;
+
+USE veterinaria;
+
+INSERT INTO dono (nome, cpf, telefone) VALUES
+('Ruan Victor', '356.563.364.76','11-99194-1346'),
+('Sofia Aquino', '538.346.746.45','11-55663-8679'),
+('Nicole Boulle', '534.364.334.67', '11-63452-3463');
+
+INSERT INTO dono VALUES
+('', 'João Victor Moraes', '545.775.245.47', '11-63562-3555'),
+('', 'João Victor Carvalho', '456.579.425.58', '11-46536-2457');
+
+INSERT INTO animal(nome, peso, raca, dono) VALUES
+('Sam', 5, 'Siamez', 1),
+('Mel', 10, 'Vira Lata', 3),
+('Mika', 15, 'Labrador', 2),
+('Leonardo', 45, 'Criança', 5),
+('Rubi', 15, 'Labrador', 2),
+('Julieta', 6, 'Siamez', 4);
+
+ALTER TABLE animal ADD COLUMN tipoAnimal varchar(255);
+
+UPDATE animal SET tipoAnimal= 'Gato' where idanimal= 1;
+UPDATE animal SET tipoAnimal= 'Cachorro' where idanimal= 2;
+UPDATE animal SET tipoAnimal= 'Cachorro' where idanimal= 3;
+UPDATE animal SET tipoAnimal= 'Gato' where idanimal= 4;
+UPDATE animal SET tipoAnimal= 'Humano' where idanimal= 5;
+
+DELETE FROM animal WHERE nome= "Rubi"

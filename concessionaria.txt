@@ -1,0 +1,21 @@
+mysql -u root
+
+create database concessionaria;
+
+create table veiculo (
+-> idveiculo int primary key auto_increment,
+-> marca varchar(50),
+-> modelo varchar(50),
+-> anofabricacao int,
+-> anomodelo int,
+-> combustivel char(1));
+
+alter table veiculo add column valor decimal(7, 2);
+
+alter table veiculo add column motor varchar(50);
+
+alter table veiculo drop column motor;
+
+drop table veiculo;
+
+drop database concessionaria;
