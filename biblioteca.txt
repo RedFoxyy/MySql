@@ -1,0 +1,86 @@
+create database biblioteca;
+
+use biblioteca;
+
+CREATE TABLE livro (
+codLivro int PRIMARY KEY auto_increment,
+genero varchar(30),
+editora varchar(30),
+autor varchar(80),
+titulo varchar(50)
+);
+
+CREATE TABLE cliente (
+ra int PRIMARY KEY auto_increment,
+dataNascimento date,
+nome varchar(100),
+turma varchar(95),
+email varchar(50) unique,
+telefone varchar(15)
+);
+
+CREATE TABLE bibliotecario (
+codBibliotecario int PRIMARY KEY auto_increment,
+nome varchar(50),
+email varchar(50) unique,
+dataNascimento date,
+cpf varchar(20) unique,
+telefone varchar(15),
+rg varchar(20) unique,
+logradouro varchar(30),
+num varchar(5),
+bairro varchar(30),
+cidade varchar(30),
+uf varchar(2),
+complemento varchar(20),
+cep varchar(15)
+);
+
+CREATE TABLE emprestimo_devolucao (
+codEmprestimo int PRIMARY KEY auto_increment,
+data_emprestimo varchar(15),
+data_devolucao varchar(15),
+ra int,
+codBibliotecario int,
+codLivro int,
+FOREIGN KEY(ra) REFERENCES cliente (ra),
+FOREIGN KEY(codBibliotecario) REFERENCES bibliotecario (codBibliotecario),
+FOREIGN KEY(codLivro) REFERENCES livro (codLivro)
+);
+
+INSERT INTO livro (genero, editora, autor, titulo) VALUES
+('Romance', 'Quirk Books', 'Ransom Riggs', 'O lar da Senhorita Peregrine para Crianças Peculiares'), 
+('Romance', 'Quirk Books', 'Ransom Riggs', 'Cidade dos Etéreos'),
+('Romance', 'Quirk Books', 'Ransom Riggs', 'Biblioteca das Almas'),
+('Romance', 'Penguin Club', 'Ransom Riggs', 'Mapa dos Dias'),
+('Romance', 'Penguin Club', 'Ransom Riggs', 'Convensão das Aves'),
+('Suspense', 'Intrinseca', 'C.J. Tudor', 'Homem de Giz'),
+('Romance', 'HarperCollins', 'Kiera Cass', 'A seleção'),
+('Romance', 'HarperCollins', 'Kiera Cass', 'A elite'),
+('Romance', 'HarperCollins', 'Kiera Cass', 'A escolha'),
+('Romance', 'HarperCollins', 'Kiera Cass', 'A Coroa');
+
+INSERT INTO bibliotecario (nome, email, DataNascimento, cpf, telefone, rg, logradouro, num, bairro, cidade, uf, complemento, cep) VALUES
+('João Guilherme', 'joaoguii@gmail.com', '30/10/2000', '469.267.118-02', '11 48564-3534', '12 345 678-9', 'Rua Santo Antônio', 134, 'Alphaville', 'São Paulo', 'SP', 5, '45773-574'),
+('Maria Santos', 'marimarias@gmail.com', '18/03/1998', '825.263.468-03', '11 48563-5834', '12 323 248-9', 'Rua Maria Cristina', 246, 'Aricanduva', 'São Paulo', 'SP', 1, '44774-296'), 
+('Rebeca Lorrane', 'becaalo@gmail.com', '13/05/1995', '275.926.374-04', '11 54782-5784', '11 683 386-9', 'Rua João Pualo', 466, 'Bela Vista', 'São Paulo', 'SP', 7, '47976-346');
+
+INSERT INTO cliente (dataNascimento, nome, turma, email, telefone) VALUES
+('15/12/2004', 'Ruan Victor', '2°C', 'ruanvictor.qa@gmail.com', '11 99194-1346'),
+('15/11/2004', 'Sofia Aquino', '2°C', 'sofiisaquino@gmail.com', '11 99642-7543'),
+('23/11/2004', 'Nicole Boulle', '2°C', 'nicoleboulle@gmail.com', '11 99572-5379'),
+('17/10/2002', 'Matheus Silva', '3°B', 'matssil@outlook.com', '11 99525-3792'),
+('01/04/2005', 'Apolo Fonseca', '1°A', 'apposeca@uol.com.br', '11 99242-5327'),
+('06/09/2003', 'Violeta Batista', '3°A', 'letabati@gmail.com', '11 99483-6262'),
+('10/03/2004', 'Arabela Antunes',  '2°B', 'abelaant@gmail.com', '11 99425-2557'),
+('29/10/2004', 'Cléber Coelho', '2°C', 'coelhocle@gmail.com', '11 99537-4632'),
+('31/05/2000', 'Carolina Rosa', '3°C', 'carolroseta@gmail.com', '11 99553-2754'),
+('21/10/2003', 'João Victor Moraes', '2°C', 'ojotavmoraes@gmail.com', '11 99561-1168');
+
+INSERT INTO emprestimo_devolucao (data_emprestimo, data_devolucao, ra) VALUES
+('11/05/20', '25/05/20', 1),
+('02/01/20', '16/01/20', 2),
+('17/03/20', '31/03/20', 2),
+('09/02/20', '23/02/20', 4),
+('06/06/20', '20/06/20', 10);
+
