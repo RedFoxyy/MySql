@@ -38,8 +38,8 @@ cep varchar(15)
 
 CREATE TABLE emprestimo_devolucao (
 codEmprestimo int PRIMARY KEY auto_increment,
-data_emprestimo varchar(15),
-data_devolucao varchar(15),
+data_emprestimo date,
+data_devolucao date,
 ra int,
 codBibliotecario int,
 codLivro int,
@@ -48,17 +48,17 @@ FOREIGN KEY(codBibliotecario) REFERENCES bibliotecario (codBibliotecario),
 FOREIGN KEY(codLivro) REFERENCES livro (codLivro)
 );
 
-INSERT INTO livro (genero, editora, autor, titulo) VALUES
-('Romance', 'Quirk Books', 'Ransom Riggs', 'O lar da Senhorita Peregrine para Crianças Peculiares'), 
-('Romance', 'Quirk Books', 'Ransom Riggs', 'Cidade dos Etéreos'),
-('Romance', 'Quirk Books', 'Ransom Riggs', 'Biblioteca das Almas'),
-('Romance', 'Penguin Club', 'Ransom Riggs', 'Mapa dos Dias'),
-('Romance', 'Penguin Club', 'Ransom Riggs', 'Convensão das Aves'),
-('Suspense', 'Intrinseca', 'C.J. Tudor', 'Homem de Giz'),
-('Romance', 'HarperCollins', 'Kiera Cass', 'A seleção'),
-('Romance', 'HarperCollins', 'Kiera Cass', 'A elite'),
-('Romance', 'HarperCollins', 'Kiera Cass', 'A escolha'),
-('Romance', 'HarperCollins', 'Kiera Cass', 'A Coroa');
+INSERT INTO livro (genero, editora, autor, titulo, paginas, exemplares) VALUES
+('Romance', 'Quirk Books', 'Ransom Riggs', 'O lar da Senhorita Peregrine para Crianças Peculiares', 335, 15), 
+('Romance', 'Quirk Books', 'Ransom Riggs', 'Cidade dos Etéreos', 420, 20),
+('Romance', 'Quirk Books', 'Ransom Riggs', 'Biblioteca das Almas', 434, 12),
+('Romance', 'Penguin Club', 'Ransom Riggs', 'Mapa dos Dias', 513, 40),
+('Romance', 'Penguin Club', 'Ransom Riggs', 'Convenção das Aves', 500, 05),
+('Suspense', 'Intrinseca', 'C.J. Tudor', 'Homem de Giz', 312, 12),
+('Romance', 'HarperCollins', 'Kiera Cass', 'A seleção', 230, 15),
+('Romance', 'HarperCollins', 'Kiera Cass', 'A elite', 321, 32),
+('Romance', 'HarperCollins', 'Kiera Cass', 'A escolha', 295, 01),
+('Romance', 'HarperCollins', 'Kiera Cass', 'A Coroa', 400, 05);
 
 INSERT INTO bibliotecario (nome, email, DataNascimento, cpf, telefone, rg, logradouro, num, bairro, cidade, uf, complemento, cep) VALUES
 ('João Guilherme', 'joaoguii@gmail.com', '30/10/2000', '469.267.118-02', '11 48564-3534', '12 345 678-9', 'Rua Santo Antônio', 134, 'Alphaville', 'São Paulo', 'SP', 5, '45773-574'),
@@ -66,21 +66,26 @@ INSERT INTO bibliotecario (nome, email, DataNascimento, cpf, telefone, rg, logra
 ('Rebeca Lorrane', 'becaalo@gmail.com', '13/05/1995', '275.926.374-04', '11 54782-5784', '11 683 386-9', 'Rua João Pualo', 466, 'Bela Vista', 'São Paulo', 'SP', 7, '47976-346');
 
 INSERT INTO cliente (dataNascimento, nome, turma, email, telefone) VALUES
-('15/12/2004', 'Ruan Victor', '2°C', 'ruanvictor.qa@gmail.com', '11 99194-1346'),
-('15/11/2004', 'Sofia Aquino', '2°C', 'sofiisaquino@gmail.com', '11 99642-7543'),
-('23/11/2004', 'Nicole Boulle', '2°C', 'nicoleboulle@gmail.com', '11 99572-5379'),
-('17/10/2002', 'Matheus Silva', '3°B', 'matssil@outlook.com', '11 99525-3792'),
-('01/04/2005', 'Apolo Fonseca', '1°A', 'apposeca@uol.com.br', '11 99242-5327'),
-('06/09/2003', 'Violeta Batista', '3°A', 'letabati@gmail.com', '11 99483-6262'),
-('10/03/2004', 'Arabela Antunes',  '2°B', 'abelaant@gmail.com', '11 99425-2557'),
-('29/10/2004', 'Cléber Coelho', '2°C', 'coelhocle@gmail.com', '11 99537-4632'),
-('31/05/2000', 'Carolina Rosa', '3°C', 'carolroseta@gmail.com', '11 99553-2754'),
-('21/10/2003', 'João Victor Moraes', '2°C', 'ojotavmoraes@gmail.com', '11 99561-1168');
+('2000-10-20', 'Ruan Victor', '2°C', 'ruanvictor.qa@gmail.com', '11 99194-1346'),
+('1998-03-11', 'Sofia Aquino', '2°C', 'sofiisaquino@gmail.com', '11 99642-7543'),
+('2004-01-12', 'Nicole Boulle', '2°C', 'nicoleboulle@gmail.com', '11 99572-5379'),
+('2000-02-04', 'Matheus Silva', '3°B', 'matssil@outlook.com', '11 99525-3792'),
+('1990-10-12', 'Apolo Fonseca', '1°A', 'apposeca@uol.com.br', '11 99242-5327'),
+('2005-12-20', 'Violeta Batista', '3°A', 'letabati@gmail.com', '11 99483-6262'),
+('2000-06-06', 'Arabela Antunes',  '2°B', 'abelaant@gmail.com', '11 99425-2557'),
+('2001-10-10', 'Cléber Coelho', '2°C', 'coelhocle@gmail.com', '11 99537-4632'),
+('2002-03-03', 'Carolina Rosa', '3°C', 'carolroseta@gmail.com', '11 99553-2754'),
+('2003-08-10', 'João Victor Moraes', '2°C', 'ojotavmoraes@gmail.com', '11 99561-1168');
 
 INSERT INTO emprestimo_devolucao (data_emprestimo, data_devolucao, ra) VALUES
-('11/05/20', '25/05/20', 1),
-('02/01/20', '16/01/20', 2),
-('17/03/20', '31/03/20', 2),
-('09/02/20', '23/02/20', 4),
-('06/06/20', '20/06/20', 10);
+('2015-06-01', '2015/05/25', 1),
+('2019-05-01', '2019-01-16', 2),
+('2020-04-11', '2020-03-31', 2),
+('2019-03-04', '2019-02-23', 4),
+('2018-06-31', '2018-06-20', 10),
+('2018-05-20', '2018-05-10', 5),
+('2020-02-12', '2020-02-01', 1),
+('2019-08-04', '2019-07-24', 2),
+('2020-03-11', '2020-02-31', 7),
+('2019-08-31', '2019-08-20', 6); 
 
