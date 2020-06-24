@@ -1,0 +1,73 @@
+CREATE DATABASE farmacia;
+USE farmacia;
+
+CREATE TABLE produto_remedio (
+codProduto int PRIMARY KEY auto_increment,
+preco decimal(7, 2),
+quantidade int,
+fabricante varchar(30),
+nome varchar(80),
+generico bit
+);
+
+CREATE TABLE atendente (
+codAtendente int PRIMARY KEY auto_increment,
+rg varchar(20) unique,
+email varchar(50) unique,
+salario decimal (7, 2),
+telefone varchar(15),
+cpf varchar(30) unique,
+nome varchar(80)
+);
+
+CREATE TABLE compra_venda (
+codCompra int PRIMARY KEY auto_increment,
+hora time,
+total varchar(10),
+data date,
+cpf varchar(15),
+codAtendente int,
+FOREIGN KEY(codAtendente) REFERENCES atendente (codAtendente)
+);
+
+CREATE TABLE itenscompra (
+quantidade int,
+total_unitario decimal(7,2),
+codCompra int,
+codProduto int,
+FOREIGN KEY(codCompra) REFERENCES compra_venda (codCompra),
+FOREIGN KEY(codProduto) REFERENCES produto_remedio (codProduto)
+);
+
+INSERT INTO atendente (rg, email, salario, telefone, cpf, nome) VALUES
+('12 345 678-9', 'mymima@gmail.com', '1650,00', '11 48564-3534', '469.267.118-02', 'Millene Maya'),
+('12 323 248-9', 'restinpe@outlook.com', '1243,00', '11 48563-5834', '825.263.468-03', 'Rakin Souza'),
+('11 683 386-9', 'geminiastro@uol.com.br', '1890,00', '11 54782-5784', '275.926.374-04', 'Apollo Marcos');
+
+INSERT INTO produto_remedio (preco, quantidade, fabricante, nome, generico) VALUES
+('42,00', 473, 'Sanofi', 'Dorflex', 0),
+('63,00', 652, 'Bayer', 'Xarelto', 1),
+('61,00', 111, 'Astrazaneca', 'Selozov', 1),
+('90,00', 644, 'Takeda', 'Neosaldina', 1),
+('88,00', 521, 'Neo Química', 'Torsilax', 1),
+('35,00', 234, 'Biolab', 'Aradois', 0),
+('46,00', 629, 'Merck', 'Glifage XR', 0),
+('23,00', 352, 'Addera', 'Addera D3', 1),
+('55,90', 223, 'La Roche', 'Anthelios', 0),
+('75,50', 843, 'Boehringer', 'Buscopan', 1);
+
+INSERT INTO compra_venda (hora, total, data, cpf, codAtendente) VALUES
+('15:03:32', '188.00', '2020-10-25', '342.255.245-02', 3),
+('21:12:34', '355.00', '2020-07-22', '430.987.589-09', 1),
+('11:45:21', '277.90', '2020-06-12', '535.742.268-02', 2);
+
+INSERT INTO itenscompra (quantidade, total_unitario, codCompra, codProduto) VALUES
+(2, '42.00', 1, 1),
+(3, '23.00', 1, 8),
+(1, '35.00', 1, 6),
+(1, '90.00', 2, 4),
+(5, '23.00', 2, 8),
+(2, '75.50', 2, 10),
+(2, '88.00', 3, 5),
+(1, '55.90', 3, 9),
+(1, '46.00', 3, 7);
